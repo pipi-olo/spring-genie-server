@@ -1,10 +1,10 @@
 package com.pipiolo.springgenie.domain.repository
 
-trait SpringDocRepository[K] {
+trait SpringDocRepository {
 
-  def insert(doc: K, vector: Seq[Float]): Unit
+  def insert(document: String, vector: Seq[Float]): Unit
 
-  def search(vector: Seq[Float]): K
+  def search(vector: Seq[Float]): String
 
   def close(): Unit
 

@@ -1,15 +1,17 @@
 package com.pipiolo.springgenie.application
 
 import com.google.inject.Inject
+import com.pipiolo.springgenie.domain.model.SpringDocSearchResponse
 import com.pipiolo.springgenie.domain.repository.SpringDocRepository
 
-class SpringGenieService[K] @Inject() (springDocRepository: SpringDocRepository[K]) {
+class SpringGenieService @Inject() (springDocRepository: SpringDocRepository) {
 
-  def insert(doc: K, vector: Seq[Float]): Unit = {
-    springDocRepository.insert(doc, vector)
+  def insert(document: String, vector: Seq[Float]): Unit = {
+    springDocRepository.insert(document, vector)
   }
 
-  def search(vector: Seq[Float]): K = {
-    springDocRepository.search(vector)
+  def search(vector: Seq[Float]): SpringDocSearchResponse = {
+    val doc = springDocRepository.search(vector)
+    SpringDocSearchResponse(document = doc)
   }
 }

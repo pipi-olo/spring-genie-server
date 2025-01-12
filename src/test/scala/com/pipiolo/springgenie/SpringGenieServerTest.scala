@@ -1,8 +1,7 @@
 package com.pipiolo.springgenie
 
-import com.twitter.finagle.http.Status
 import com.twitter.finatra.http.EmbeddedHttpServer
-import com.twitter.inject.server.{FeatureTest, FeatureTestMixin}
+import com.twitter.inject.server.FeatureTestMixin
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers
 

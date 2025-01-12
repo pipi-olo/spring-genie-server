@@ -2,15 +2,15 @@ package com.pipiolo.springgenie.presentation
 
 import com.pipiolo.springgenie.SpringGenieServer
 import com.twitter.finagle.http.Status
+import com.twitter.finatra.http.EmbeddedHttpServer
 import com.twitter.finatra.http.routing.HttpRouter
-import com.twitter.finatra.http.{EmbeddedHttpServer, HttpServer}
-import com.twitter.inject.server.{EmbeddedTwitterServer, FeatureTestMixin}
+import com.twitter.inject.server.FeatureTestMixin
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers
 
 class ExampleControllerTest extends AnyFlatSpec with Matchers with FeatureTestMixin {
 
-  override val server = new EmbeddedHttpServer(twitterServer = new HttpServer() {
+  override val server = new EmbeddedHttpServer(twitterServer = new SpringGenieServer {
     override protected def configureHttp(router: HttpRouter): Unit = router.add[ExampleController]
   })
 

@@ -9,7 +9,6 @@ object AppModule extends TwitterModule {
 
   @Singleton
   @Provides
-  def providesSpringDocRepositoryInstance: SpringDocRepository[String] =
-    new SpringDocMemRepository()
+  def providesSpringDocRepositoryInstance: SpringDocRepository = new SpringDocMemRepository()
 
 }

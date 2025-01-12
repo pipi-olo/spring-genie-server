@@ -2,18 +2,19 @@ package com.pipiolo.springgenie.presentation
 
 import com.google.inject.Inject
 import com.pipiolo.springgenie.application.SpringGenieService
-import com.twitter.finagle.http.Request
+import com.pipiolo.springgenie.domain.model.{SpringDocInsertRequest, SpringDocSearchRequest}
+import com.twitter.finagle.http.{Response, Status}
 import com.twitter.finatra.http.Controller
 
-import scala.util.Random
+class SpringGenieController @Inject() (springGenieService: SpringGenieService) extends Controller {
 
-class SpringGenieController @Inject() (springGenieService: SpringGenieService[String]) extends Controller {
-
-  get("/springdoc") { request: Request =>
-    springGenieService.search(Seq.fill(5)(Random.nextFloat))
+  get("/springdoc") { searchRequest: SpringDocSearchRequest =>
+    springGenieService.search(searchRequest.vector)
   }
 
-  post("/springdoc") { request: Request =>
-    springGenieService.insert("asd", Seq.fill(5)(Random.nextFloat))
+  post("/springdoc") { insertRequest: SpringDocInsertRequest =>
+    springGenieService.insert(insertRequest.document, insertRequest.vector)
+
+    Response(status = Status.Ok)
   }
 }
